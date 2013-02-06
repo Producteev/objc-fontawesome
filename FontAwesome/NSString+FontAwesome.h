@@ -294,4 +294,10 @@ typedef NS_ENUM(NSInteger, FAIcon) {
  * http://fortawesome.github.com/Font-Awesome/#all-icons */
 + (NSString*)fontAwesomeIconStringForIconIdentifier:(NSString*)identifier;
 
+
+/* Returns a dictionary font-awesome identifier as key and enum equivalent as value.
+ * The list of identifiers can be found here:
+ * http://fortawesome.github.com/Font-Awesome/#all-icons */
++ (NSDictionary*)fontAwesomeIconIdentifierToEnumDictionary;
+
 @end

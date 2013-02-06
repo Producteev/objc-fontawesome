@@ -1,15 +1,24 @@
-FontAwesome+iOS
+ObjC-FontAwesome
 ===================
+
+This Project was originally made for iOS only by **Alex Usbergo**: https://github.com/alexdrone/ios-fontawesome
 
 Font awesome is an iconic font. Read more about it on http://fortawesome.github.com/Font-Awesome/
 
-This category brings this great iconic font on iOS.
+This category brings this great iconic font on iOS and OSX.
 
 Usage
 --------------------
 
-First, make sure you have `FontAwesome.ttf` bundled in your project and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.ttf` 
+First, make sure that:
+
+- **On iOS:** you have `FontAwesome.ttf` bundled in your project and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.ttf`.
+
+- **On OS X:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.ttf` in the list of files.
+
 Then add the `NSString+FontAwesome` category to the project.
+
+**On iOS:**
 
 	UILabel *label = [...]
 	label.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
@@ -21,13 +30,29 @@ You can now use enums for all the different iconic characters
 or you can reference them by using the class identifiers listed here http://fortawesome.github.com/Font-Awesome/#all-icons
 
 	label.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-github"];
+
+**On OS X:**
+
+	NSTextField *textField = [...]
+	textField.font = [NSFont fontWithName:kFontAwesomeFamilyName size:20];
 	
-That's it!
+You can now use enums for all the different iconic characters
+
+	textField.stringValue = [NSString fontAwesomeIconStringForEnum:FAIconGithub];
+	
+or you can reference them by using the class identifiers listed here http://fortawesome.github.com/Font-Awesome/#all-icons
+
+	textField.stringValue = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-github"];
+
+
+**That's it!**
+
 For further information have a look to the small demo project!
 
 FAImageView
 --------------------
 
+FAImageView only works on iOS.
 FAImageView is now extended and contains a new property called `defaultView` that is shown when the image is set to nil.
 It is possible to use one the font-awesome icon as a default placeholder for an image view.
 

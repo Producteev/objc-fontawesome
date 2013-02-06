@@ -1,7 +1,9 @@
 //
-//  UIFont+FontAwesome.m
+//  NSFont+FontAwesome.h
+//  FontAwesome-ObjC Demo
 //
-//  Copyright (c) 2012 Alex Usbergo. All rights reserved.
+//  Created by Thibaut Jarosz on 06/02/2013.
+//  Copyright (c) 2013 Thibaut Jarosz & Alex Usbergo. All rights reserved.
 //
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,12 +23,15 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 
+#if	!TARGET_OS_IPHONE
 
-#import <UIKit/UIKit.h>
+#import <Cocoa/Cocoa.h>
 
-@interface UIFont (FontAwesome)
+@interface NSFont (FontAwesome)
 
 /* Returns the FontAwesome iconic font */
-+ (UIFont*)iconicFontOfSize:(CGFloat)size;
++ (NSFont*)iconicFontOfSize:(CGFloat)size;
 
 @end
+
+#endif

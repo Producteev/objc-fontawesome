@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Alex Usbergo. All rights reserved.
 //
 
+#if	TARGET_OS_IPHONE
+
 #import "UIFont+FontAwesome.h"
 #import "NSString+FontAwesome.h"
 
@@ -18,3 +20,5 @@
 }
 
 @end
+
+#endif

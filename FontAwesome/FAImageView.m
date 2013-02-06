@@ -26,6 +26,8 @@
 //  if the image is missing
 
 
+#if	TARGET_OS_IPHONE
+
 #import "FAImageView.h"
 #import "UIFont+FontAwesome.h"
 
@@ -84,3 +86,5 @@
 }
 
 @end
+
+#endif

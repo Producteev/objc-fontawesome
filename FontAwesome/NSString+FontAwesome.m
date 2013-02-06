@@ -33,8 +33,7 @@
  * http://fortawesome.github.com/Font-awesome/#all-icons */
 + (FAIcon)fontAwesomeEnumForIconIdentifier:(NSString*)string
 {
-    NSDictionary *enums = [self enumDictionary];
-    return [enums[string] integerValue];
+    return [[self fontAwesomeIconIdentifierToEnumDictionary][string] integerValue];
 }
 
 /* Returns the font-awesome character associated to the
@@ -63,10 +62,11 @@
     return fontAwesomeIcons;
 }
 
-+ (NSDictionary*)enumDictionary
++ (NSDictionary*)fontAwesomeIconIdentifierToEnumDictionary
 {
 	static NSDictionary *enumDictionary;
-	if (nil == enumDictionary) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
 		NSMutableDictionary *tmp = [[NSMutableDictionary alloc] init];
 		tmp[@"icon-glass"] = @(FAIconGlass);
 		tmp[@"icon-music"] = @(FAIconMusic);
@@ -318,7 +318,7 @@
 		tmp[@"icon-folder-open-alt"] = @(FAIconFolderOpenAlt);
 		tmp[@"icon-suitcase"] = @(FAIconSuitcase);
 		enumDictionary = tmp;
-	}
+	});
     
     return enumDictionary;
 }
