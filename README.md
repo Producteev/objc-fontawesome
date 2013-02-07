@@ -12,9 +12,11 @@ Usage
 
 First, make sure that:
 
-- **On iOS:** you have `FontAwesome.ttf` bundled in your project and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.ttf`.
+- **On iOS:** you have `FontAwesome.ttf` bundled in your project (this is done automatically is you are using CocoaPods) and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.ttf`.
 
-- **On OS X:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.ttf` in the list of files.
+- **On OS X without CocoaPods:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.ttf` in the list of files.
+
+- **On OS X with CocoaPods:** CocoaPods copy the file directly into the `Resources` folder. The `ATSApplicationFontsPath` key in the project's plist file must contains the string `.` (dot, wich is a reference to the current folder).
 
 Then add the `NSString+FontAwesome` category to the project.
 
