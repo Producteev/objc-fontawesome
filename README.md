@@ -16,7 +16,7 @@ First, make sure that:
 
 - **On OS X without CocoaPods:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.ttf` in the list of files.
 
-- **On OS X with CocoaPods:** CocoaPods copy the file directly into the `Resources` folder. The `ATSApplicationFontsPath` key in the project's plist file must contains the string `.` (dot, wich is a reference to the current folder).
+- **On OS X with CocoaPods:** CocoaPods copy the file directly into the `Resources/Fonts` folder. The `ATSApplicationFontsPath` key in the project's plist file must contains the string `Fonts`. If you need to integrate other fonts into your project, follow the `Copy Files` of the previous section, without adding FontAwesome.ttf.
 
 Then add the `NSString+FontAwesome` category to the project.
 
