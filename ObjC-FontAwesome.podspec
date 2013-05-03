@@ -8,13 +8,14 @@
 #
 Pod::Spec.new do |s|
   s.name         = "ObjC-FontAwesome"
-  s.version      = "0.0.1"
+  s.version      = "0.1.0"
   s.summary      = "FontAwesome Wrapper for iOS and OS X."
   s.homepage     = "http://www.producteev.com"
+  s.license      = { :type => 'Creative Commons (CC BY 3.0)', :file => 'LICENSE' }
 
-  s.author       = { "Thibaut Jarosz" => "thibaut.jarosz@gmail.com" }
+  s.authors      = { "Alex Usbergo" => "alexakadrone@gmail.com", "Thibaut Jarosz" => "thibaut.jarosz@gmail.com" }
 
-  s.source       = { :git => "https://github.com/thibaut-jarosz/objc-fontawesome.git" }
+  s.source       = { :git => "https://github.com/Producteev/objc-fontawesome.git", :tag => s.version.to_s }
 
   s.ios.deployment_target = '4.3'
   s.osx.deployment_target = '10.7'
