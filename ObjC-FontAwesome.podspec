@@ -8,7 +8,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "ObjC-FontAwesome"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "FontAwesome Wrapper for iOS and OS X."
   s.homepage     = "http://www.producteev.com"
   s.license      = { :type => 'Creative Commons (CC BY 3.0)', :file => 'LICENSE' }
