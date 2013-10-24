@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source_files = 'FontAwesome/*.{h,m}'
   s.public_header_files = 'FontAwesome/*.h'
 
-  s.ios.resources = "FontAwesome/Resources/**/*.ttf"
+  s.ios.resources = "FontAwesome/Resources/**/*.otf"
   s.osx.resources = "FontAwesome/Resources/Fonts"
   s.requires_arc = true
 end
