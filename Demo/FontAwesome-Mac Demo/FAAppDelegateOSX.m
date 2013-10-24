@@ -23,13 +23,7 @@
 
 - (NSArray *)iconIdentiferArray
 {
-    static NSArray *iconIdentiferArray = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        iconIdentiferArray = [[[NSString fontAwesomeIconIdentifierToEnumDictionary] allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    });
-    
-    return iconIdentiferArray;
+    return [NSString fontAwesomeAvailableIcons];
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -41,7 +35,7 @@
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:stringValue];
     [attributedString addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:16] range:NSMakeRange(1, stringValue.length - 1)];
-    [attributedString addAttribute:NSFontAttributeName value:[NSFont iconicFontOfSize:16] range:NSMakeRange(0, 1)];
+    [attributedString addAttribute:NSFontAttributeName value:[NSFont fontAwesomeFontOfSize:16] range:NSMakeRange(0, 1)];
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:CellID owner:self];
     cellView.textField.attributedStringValue = attributedString;

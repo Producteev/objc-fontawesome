@@ -9,6 +9,7 @@
 
 #import "FATableViewController.h"
 #import "NSString+FontAwesome.h"
+#import "UIFont+FontAwesome.h"
 #import "FATableViewCell.h"
 
 @interface FATableViewController ()
@@ -46,11 +47,14 @@
     self.searchDisplayController.delegate = self;
     self.searchDisplayController.searchResultsDataSource = self;
     self.searchDisplayController.searchResultsDelegate = self;
-    
-    [self.navigationController.navigationBar setTintColor:[UIColor orangeColor]];
+
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+        [self.navigationController.navigationBar setBarTintColor:[UIColor orangeColor]];
+    } else {
+        [self.navigationController.navigationBar setTintColor:[UIColor orangeColor]];
+    }
 	
 	[self.tableView registerClass:[FATableViewCell class] forCellReuseIdentifier:@"Cell"];
-
 	[self.navigationItem setTitle:[NSString stringWithFormat:@"%d Font Awesome icons", [self.iconIdentiferArray count]]];
 }
 
@@ -64,7 +68,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
@@ -84,59 +87,18 @@
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForIconIdentifier:[self.iconSearchArray objectAtIndex:indexPath.row]], [self.iconSearchArray objectAtIndex:indexPath.row]];
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForIconIdentifier:[self.iconSearchArray objectAtIndex:indexPath.row]], [self.iconSearchArray objectAtIndex:indexPath.row]]];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(1, [cell.textLabel.text length] - 1)];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:kFontAwesomeFamilyName size:22] range:NSMakeRange(0, 1)];
-        [cell.textLabel setAttributedText:attributedString];
     } else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForIconIdentifier:[self.iconIdentiferArray objectAtIndex:indexPath.row]], [self.iconIdentiferArray objectAtIndex:indexPath.row]];
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", [NSString fontAwesomeIconStringForIconIdentifier:[self.iconIdentiferArray objectAtIndex:indexPath.row]], [self.iconIdentiferArray objectAtIndex:indexPath.row]]];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(1, [cell.textLabel.text length] - 1)];
-        [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:kFontAwesomeFamilyName size:22] range:NSMakeRange(0, 1)];
-        [cell.textLabel setAttributedText:attributedString];
     }
-    
+
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.textLabel.text];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16.0f] range:NSMakeRange(1, [cell.textLabel.text length] - 1)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont fontAwesomeFontOfSize:22.0f] range:NSMakeRange(0, 1)];
+    [cell.textLabel setAttributedText:attributedString];
+
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -165,17 +127,7 @@
 }
 
 - (NSArray*)iconIdentiferArray {
-    static NSArray *enumArray;
-	if (nil == enumArray) {
-        enumArray = [[[self icons] allKeys] sortedArrayUsingSelector:@selector(compare:)];
-	}
-    return enumArray;
-}
-
-#pragma mark - Copy of the enumDictionary
-
-- (NSDictionary*)icons {
-    return [NSString fontAwesomeIconIdentifierToEnumDictionary];
+    return [NSString fontAwesomeAvailableIcons];
 }
 
 @end
