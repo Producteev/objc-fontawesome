@@ -5,64 +5,72 @@ This Project was originally made for iOS only by **Alex Usbergo**: https://githu
 
 Font awesome is an iconic font. Read more about it on http://fortawesome.github.com/Font-Awesome/
 
-This category brings this great iconic font on iOS and OSX.
+This category brings the great **FontAwesome 4.0** font on iOS and OSX.
+Font Awesome version 4.0 introduced an important naming convention change. We choosed to simplify the base library and we dropped support of FAIcon enum identifiers & FAImageView.
 
 Usage
 --------------------
 
 First, make sure that:
 
-- **On iOS:** you have `FontAwesome.ttf` bundled in your project (this is done automatically is you are using CocoaPods) and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.ttf`.
+- **On iOS:** you have `FontAwesome.otf` bundled in your project (this is done automatically is you are using CocoaPods) and that `UIAppFonts` key in the project's plist file contains a String item named `FontAwesome.otf`.
 
-- **On OS X without CocoaPods:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.ttf` in the list of files.
+- **On OS X without CocoaPods:** `ATSApplicationFontsPath` key in the project's plist file contains a string (usually `Fonts`) and that on the Target Build Phases, you have a `Copy Files` phase with `Resources` as Destination, the previously defined key as Subpath (usually `Fonts`) and `FontAwesome.otf` in the list of files.
 
-- **On OS X with CocoaPods:** CocoaPods copy the file directly into the `Resources/Fonts` folder. The `ATSApplicationFontsPath` key in the project's plist file must contains the string `Fonts`. If you need to integrate other fonts into your project, follow the `Copy Files` of the previous section, without adding FontAwesome.ttf.
+- **On OS X with CocoaPods:** CocoaPods copy the file directly into the `Resources/Fonts` folder. The `ATSApplicationFontsPath` key in the project's plist file must contains the string `Fonts`. If you need to integrate other fonts into your project, follow the `Copy Files` of the previous section, without adding FontAwesome.otf.
 
-Then add the `NSString+FontAwesome` category to the project.
+Then add the `NSString+FontAwesome` & `UIFont+FontAwesome` (or `NSFont+FontAwesome`) categories to the project. (they will be available automatically if you use Cocoapods).
 
 **On iOS:**
 
 	UILabel *label = [...]
-	label.font = [UIFont fontWithName:kFontAwesomeFamilyName size:20];
+	label.font = [UIFont fontAwesomeFontOfSize:20];
 	
-You can now use enums for all the different iconic characters
+You can now use identifiers for all the different iconic characters
 
-	label.text = [NSString fontAwesomeIconStringForEnum:FAIconGithub];
+	label.text = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-github"];
 	
-or you can reference them by using the class identifiers listed here http://fortawesome.github.com/Font-Awesome/#all-icons
-
-	label.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-github"];
+Full list of identifiers here http://fortawesome.github.com/Font-Awesome/#all-icons
 
 **On OS X:**
 
 	NSTextField *textField = [...]
-	textField.font = [NSFont fontWithName:kFontAwesomeFamilyName size:20];
+	textField.font = [NSFont fontAwesomeFontOfSize:20];
 	
-You can now use enums for all the different iconic characters
+ou can now use identifiers for all the different iconic characters
 
-	textField.stringValue = [NSString fontAwesomeIconStringForEnum:FAIconGithub];
-	
-or you can reference them by using the class identifiers listed here http://fortawesome.github.com/Font-Awesome/#all-icons
-
-	textField.stringValue = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-github"];
+	textField.stringValue = [NSString fontAwesomeIconStringForIconIdentifier:@"fa-github"];
 
 
 **That's it!**
 
 For further information have a look to the small demo project!
 
-FAImageView
+
+Backward Compatibility
 --------------------
 
-FAImageView only works on iOS.
-FAImageView is now extended and contains a new property called `defaultView` that is shown when the image is set to nil.
-It is possible to use one the font-awesome icon as a default placeholder for an image view.
+#### FontAwesome 3 Icons Identifiers
 
-	FAImageView *imageView = [[FAImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, 100.f, 100.f)];
-    imageView.image = nil;
-    [imageView setDefaultIconIdentifier:@"icon-github"];
+This library is designed for FontAwesome 4 only that introduced a new naming convention (See http://fortawesome.github.io/Font-Awesome/whats-new/). `fa-[name]-[shape]-[o]-[direction]`
+
+However, we provide a very basic compatibily mode (replacing the old `icon-` prefix by `fa-`), it will works well in a lot of case, but make sure your app is displaying the correct icon if you use Font Awesome 3.x identifiers.
+
+
+#### FAImageView & FAIcon
+
+Even if we like the idea behind FAIcon, it makes the library harder to maintain. A FAICon must point to the correct index of an array, index being the FAIcon enum value, but without direct mapping in code. We now have a simple NSDictionary that we can easily update as FontAwesome get new icons. Also we think that using the icons identifier is easier than using an alternate enum type.
+
+FAImageView was a nice addition, we removed it because it was using FAIcon, and also we preffered this library to deal only with Fonts & String.
+
+If you need any of those, go to [https://github.com/alexdrone/ios-fontawesome](https://github.com/alexdrone/ios-fontawesome)
+
 
 License
 -------------------
 
-This project uses the FontAwesome fix made by Pit Garbe that you can find at https://github.com/leberwurstsaft/FontAwesome-for-iOS Version 2.0 of the Font Awesome font, CSS, and LESS files are licensed under CC BY 3.0: http://creativecommons.org/licenses/by/3.0/ A mention of 'Font Awesome - http://fortawesome.github.com/Font-Awesome' in human-readable source code is considered acceptable attribution (most common on the web). If human readable source code is not available to the end user, a mention in an 'About' or 'Credits' screen is considered acceptable (most common in desktop or mobile software)
+- This Project is Licensed under the MIT License.
+- Original Project by Alex Usbergo is licensed under the MIT License.
+- Font Awesome 4.0 (font) is licensed under the SIL Open Font License 1.1
+
+Please see the LICENSE file.

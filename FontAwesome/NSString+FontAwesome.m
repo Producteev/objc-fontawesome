@@ -1,7 +1,7 @@
 //
 //  NSString+FontAwesome.m
 //
-//  Copyright (c) 2012 Alex Usbergo. All rights reserved.
+//  Copyright (c) 2013 Producteev & Alex Usbergo. All rights reserved.
 //
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
