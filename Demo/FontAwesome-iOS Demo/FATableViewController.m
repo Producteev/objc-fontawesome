@@ -93,7 +93,7 @@
 
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.textLabel.text];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16.0f] range:NSMakeRange(1, [cell.textLabel.text length] - 1)];
-    [attributedString addAttribute:NSFontAttributeName value:[UIFont iconicFontOfSize:22.0f] range:NSMakeRange(0, 1)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont fontAwesomeFontOfSize:22.0f] range:NSMakeRange(0, 1)];
     [cell.textLabel setAttributedText:attributedString];
 
     return cell;
@@ -127,11 +127,7 @@
 }
 
 - (NSArray*)iconIdentiferArray {
-    static NSArray *enumArray;
-	if (nil == enumArray) {
-        enumArray = [[[NSString fontAwesomeIconIdentifierToEnumDictionary] allKeys] sortedArrayUsingSelector:@selector(compare:)];
-	}
-    return enumArray;
+    return [NSString fontAwesomeAvailableIcons];
 }
 
 @end

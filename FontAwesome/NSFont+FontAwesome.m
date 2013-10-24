@@ -13,8 +13,12 @@
 
 @implementation NSFont (FontAwesome)
 
-/* Returns the FontAwesome iconic font */
 + (NSFont*)iconicFontOfSize:(CGFloat)size
+{
+    return [NSFont fontAwesomeFontOfSize:size];
+}
+
++ (NSFont*)fontAwesomeFontOfSize:(CGFloat)size;
 {
     return [NSFont fontWithName:kFontAwesomeFamilyName size:size];
 }

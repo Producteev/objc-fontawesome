@@ -28,8 +28,10 @@
 
 @interface UIFont (FontAwesome)
 
++ (UIFont*)iconicFontOfSize:(CGFloat)size __deprecated;
+
 /* Returns the FontAwesome iconic font */
-+ (UIFont*)iconicFontOfSize:(CGFloat)size;
++ (UIFont*)fontAwesomeFontOfSize:(CGFloat)size;
 
 @end
 

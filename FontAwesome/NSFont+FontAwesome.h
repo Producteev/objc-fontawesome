@@ -29,8 +29,10 @@
 
 @interface NSFont (FontAwesome)
 
++ (NSFont*)iconicFontOfSize:(CGFloat)size __deprecated;
+
 /* Returns the FontAwesome iconic font */
-+ (NSFont*)iconicFontOfSize:(CGFloat)size;
++ (NSFont*)fontAwesomeFontOfSize:(CGFloat)size;
 
 @end
 
